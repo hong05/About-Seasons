@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <script>
+     window.addEventListener("load",function(){
+       var preload = document.getElementById("preload");
+       preload.style.display="none";
+     })
+   </script>
+   <style>
+      #spring{
+        background-color:rgb(242,207,203);
+        height: 10000px;
+      }
+      p,h2{
+        font-family: Papyrus, fantasy;
+      }
+     .springH{
+       font-size: 50px;
+       /*color: rgb(245,235,233);*/
+       /*color: rgb(185,95,146);*/
+       color:rgb(187,154,173);
+       margin-top:0;
+       margin-left: 5%;
+       padding-top: 35px;
+       animation-name: leftToright;
+       animation-duration: 2s;
+     }
+     @keyframes leftToright {
+       from {
+         transform: translateX(-50%);
+       }
+       to {
+         transform:  translateX(0);
+       }
+}
+      #walk{
+        position: relative;
+        left:560px;
+        top:-70px;
+      }
+      img.springImg{
+        width:42%;
+        height:auto;
+        border-radius: 45px;
+        box-shadow: 8px 8px 8px white;
+      }
+      #sunImg,#sunPara{
+        float: left;
+        margin-left: 5%;
+        margin-top: -4%;
+        color: rgb(107,85,98);
+        /*color: rgb(255,158,71);*/
+        /*color: rgb(255,236,134);*/
+      }
+      #flowerImg,#flowerPara{
+        float:right;
+        margin-right: 5%;
+        display: none;
+        color: rgb(107,85,98);
+      }
+      #flowerText,#sunText{
+        cursor: url(image/flower-icon.ico),auto;
+      }
+      #sunText,#flowerText{
+        text-indent:25px;
+      }
+      #flowerImg:hover{
+        filter: blur(4px);
+      }
+      #flowerText:hover, #sunText:hover{
+        font-weight: bold;
+      }
+      #sunHead,#flowerHead{
+        text-align: center;
+        /*color: rgb(255,236,134);*/
+      }
+      #sunPara,#flowerPara{
+        width: 42%;
+        height: auto;
+        font-size: 20px;
+        padding-top: 3%;
+      }
+      p.clear{
+        clear: both;
+      }
+      #foot1{
+        position: relative;
+        left:100px;
+        top:-20px;
+        transform: rotate(110deg);
+      }
+      #foot2{
+        position: relative;
+        left:180px;
+        top:-20px;
+        width: 55px;
+        transform: rotate(80deg);
+        display: none;
+      }
+      #foot3{
+        position: relative;
+        left:100px;
+        top:-10px;
+        width: 60px;
+        transform: rotate(100deg);
+        display: none;
+      }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ </head>
+<body>
+    <div id="preload"><img src = "load.gif"></div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+    <div id="spring">
+
+        <p class="springH">Greet the first flower in full bloom</p>
+        <p class="springH" id="walk" >Go out for a walk...</p>
+
+        <div id="sun">
+          <img id="sunImg" class="springImg" src="image/sun1.jpg">
+          <span id="sunPara">
+            <h2 id="sunHead">Sunshine in Spring </h2>
+            <p id="sunText">
+              The sun was bright and early. Its rays, like fingers stretching across the darkened sky,
+               bring with it a new day. Gradually, the sun fills the sky with its brilliance and a warm glow.
+              The yolk looking sun has turned from yellowish brown to golden.
+              Everyone is coming out and enjoying the warm and beautiful day,
+               feeling the gentle heat. We celebrate the new year and appreciate the sun.</p>
+
+            <p class="clear"></p>
+            <img id="foot1" src="image/foot0.png">
+            <img id="foot2" src="image/foot0.png">
+            <img id="foot3" src="image/foot0.png">
+          </span>
+        </div>
+
+        <div>
+          <img class="springImg" id="flowerImg" src="image/s0.jpg">
+          <span id="flowerPara">
+            <h2 id="flowerHead">Flowers in Spring</h2>
+            <p id="flowerText">
+              The flower that had been a tight bud only days ago had begun to open, already had a deeper blush of pink.
+                 The winter should still be in force but already spring had pushed it back to moderate temperatures
+                  and the kind of gentle breeze you don't notice unless you stop and be present in the moment.
+                   Just to watching them tumble will bring back memories of weddings, my own included. Fun times, beautiful times...
+            </p>
+          </span>
+        </div>
+
+    </div>
+
+    <script>
+      document.getElementById("foot1").addEventListener("mouseover",showFoot2);
+      function showFoot2(){
+        document.getElementById("foot2").style.display="block";
+      }
+      document.getElementById("foot2").addEventListener("mouseover",showFoot3);
+      function showFoot3(){
+        document.getElementById("foot3").style.display="block";
+      }
+      $(document).ready(function(){
+        $("#foot3").hover(function(){
+            $("#flowerImg").fadeIn("slow");
+            $("#flowerPara").slideDown("slow");
+        })
+      })
+
+      var imgs= document.getElementsByClassName("springImg");
+      for(var i=0;i<imgs.length;i++){
+        imgs[i].addEventListener("click", pressed(imgs[i]));
+      }
+      function pressed(x){
+        x.style="transform: translateY(40px)";
+      }
+
+
+    </script>
+ </body>
+
+</html>
