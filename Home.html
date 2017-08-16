@@ -8,9 +8,10 @@
      })
    </script>
    <style>
+
       #spring{
         background-color:rgb(242,207,203);
-        height: 10000px;
+        overflow:hidden;
       }
       p,h2{
         font-family: Papyrus, fantasy;
@@ -23,17 +24,25 @@
        margin-top:0;
        margin-left: 5%;
        padding-top: 35px;
+       transition: all 1s ease-out;
+       transform: translateX(-300px);
+       opacity: 0;
+     }
+     .springH.appear{
+       transform: translateX(0);
+       opacity: 1;
+     }
+       /*
        animation-name: leftToright;
        animation-duration: 2s;
-     }
+
      @keyframes leftToright {
        from {
          transform: translateX(-50%);
        }
        to {
          transform:  translateX(0);
-       }
-}
+       }*/
       #walk{
         position: relative;
         left:560px;
@@ -44,6 +53,7 @@
         height:auto;
         border-radius: 45px;
         box-shadow: 8px 8px 8px white;
+        display: block;
       }
       #sunImg,#sunPara{
         float: left;
@@ -52,7 +62,15 @@
         color: rgb(107,85,98);
         /*color: rgb(255,158,71);*/
         /*color: rgb(255,236,134);*/
+        transition: all 1s ease-out;
+        transform: translateY(50px);
+        opacity: 0;
       }
+      #sunImg.appear,#sunPara.appear{
+        transform: translateY(0);
+        opacity: 1;
+      }
+
       #flowerImg,#flowerPara{
         float:right;
         margin-right: 5%;
@@ -65,29 +83,32 @@
       #sunText,#flowerText{
         text-indent:25px;
       }
+      /*
       #flowerImg:hover{
         filter: blur(4px);
       }
+      */
       #flowerText:hover, #sunText:hover{
         font-weight: bold;
       }
       #sunHead,#flowerHead{
         text-align: center;
-        /*color: rgb(255,236,134);*/
       }
       #sunPara,#flowerPara{
         width: 42%;
         height: auto;
         font-size: 20px;
-        padding-top: 3%;
+        padding-top: -2%;
       }
-      p.clear{
+
+      #foots{
+        overflow: hidden;
+        width: 100%;
         clear: both;
       }
       #foot1{
         position: relative;
         left:100px;
-        top:-20px;
         transform: rotate(110deg);
       }
       #foot2{
@@ -133,10 +154,12 @@
               Everyone is coming out and enjoying the warm and beautiful day,
                feeling the gentle heat. We celebrate the new year and appreciate the sun.</p>
 
-            <p class="clear"></p>
-            <img id="foot1" src="image/foot0.png">
-            <img id="foot2" src="image/foot0.png">
-            <img id="foot3" src="image/foot0.png">
+            <!--<p class="clear"></p>-->
+            <div id="foots">
+              <img id="foot1" src="image/foot0.png">
+              <img id="foot2" src="image/foot0.png">
+              <img id="foot3" src="image/foot0.png">
+           </div>
           </span>
         </div>
 
@@ -160,6 +183,7 @@
       function showFoot2(){
         document.getElementById("foot2").style.display="block";
       }
+
       document.getElementById("foot2").addEventListener("mouseover",showFoot3);
       function showFoot3(){
         document.getElementById("foot3").style.display="block";
@@ -170,16 +194,50 @@
             $("#flowerPara").slideDown("slow");
         })
       })
-
+      /*
       var imgs= document.getElementsByClassName("springImg");
       for(var i=0;i<imgs.length;i++){
         imgs[i].addEventListener("click", pressed(imgs[i]));
       }
       function pressed(x){
         x.style="transform: translateY(40px)";
+      }*/
+
+      /*----------------------------------------------------------------------
+      https://www.kirupa.com/animations/examples/animate_scroll.htm
+      */
+      window.addEventListener("scroll",scrolling,false);
+
+      var springH= document.querySelectorAll(".springH");
+      var sunImg=document.querySelector("#sunImg");
+      var sunPara=document.querySelector("#sunPara");
+
+      function scrolling(e){
+        for (var i=0;i<springH.length;i++){
+          var head=springH[i];
+          if(isPartiallyVisible(head)){
+            head.classList.add("appear");
+          }else{
+            head.classList.remove("appear");
+          }
+        }
+        if(isPartiallyVisible(sunImg)){
+          sunImg.classList.add("appear");
+        }else{
+          sunImg.classList.remove("appear");
+        }
+        if(isPartiallyVisible(sunPara)){
+          sunPara.classList.add("appear");
+        }else{
+          sunPara.classList.remove("appear");
+        }
       }
 
-
+      function isPartiallyVisible(item){
+        var b = item.getBoundingClientRect();
+        return ((b.top + b.bottom>=0) &&(b.height+window.innerHeight>=b.bottom));
+      }
+      /*---------------------------------------------------------------------*/
     </script>
  </body>
 
